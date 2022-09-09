@@ -78,4 +78,16 @@ const getDepartmentHtml = (departmentList) => {
       departmentHtml = `${departmentHtml} <div class='dept-label'>${department}</div>`
     }
     return departmentHtml
-  }
+}
+const remove = (node) => {
+  let empPayrollData = empPayrollList.find(empData => empData._name == node.name);
+  if(!empPayrollData) return;
+  const index = empPayrollList
+                  .map(empData => empData._name)
+                  .indexOf(empPayrollData._name);
+  empPayrollList.splice(index, 1);
+  localStorage.setItem("EmployeePayrollList", JSON.stringify(empPayrollList));
+  document.querySelector(".emp-count").textContent = empPayrollList.length;
+  createInnerHtml();
+}
+
